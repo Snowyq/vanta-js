@@ -24,7 +24,7 @@ export default function Home() {
         >
           <motion.h1
             style={{ top }}
-            className="fixed text-white font-bold text-8xl  top-[50vh]"
+            className="fixed text-black font-bold text-8xl  top-[50vh]"
           >
             AMOK STUDIO
           </motion.h1>
