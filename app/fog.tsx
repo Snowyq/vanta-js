@@ -1,17 +1,21 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { VANTA } from "../lib/vanta-js/vanta.fog";
 import * as THREE from "three";
 import * as motion from "motion/react-client";
 import { useMotionValueEvent, useScroll } from "motion/react";
 
-export default function Fog() {
+export default function Fog({
+  scrollRef,
+}: {
+  scrollRef: RefObject<HTMLDivElement | null>;
+}) {
   const ref = useRef<HTMLDivElement | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fogRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
+    target: scrollRef,
+    offset: ["start end", "start start"],
   });
 
   useEffect(() => {
