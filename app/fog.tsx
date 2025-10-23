@@ -24,10 +24,11 @@ export default function Fog({
     const fog = VANTA.FOG({
       THREE: THREE,
       el: ref.current,
+      forceAnimate: true,
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
-      minHeight: 200.0,
+      minHeight: 2000.0,
       minWidth: 200.0,
       highlightColor: 0xdedede,
       midtoneColor: 0xd97f6a,
@@ -35,7 +36,7 @@ export default function Fog({
       baseColor: 0xd22727,
       blurFactor: 0.39,
       speed: 0,
-      zoom: 2,
+      zoom: 6,
     });
 
     fogRef.current = fog;
@@ -43,8 +44,12 @@ export default function Fog({
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     console.log("scroll: ", latest);
+    console.log(fogRef.current);
     if (fogRef.current) {
-      fogRef.current.setOptions({ speed: 0 + latest * 5 - 2 });
+      console.log(latest);
+      const speed = Math.max(0.5, Math.min(0 + latest * 5 - 1, 5));
+      console.log(speed);
+      fogRef.current.setOptions({ speed });
     }
   });
 

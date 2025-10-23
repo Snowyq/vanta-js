@@ -11,8 +11,8 @@ export default function Home() {
     offset: ["start end", "end end"],
   });
 
-  const top = useTransform(scrollYProgress, [0.33, 1], ["50vh", "1vh"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 2]);
+  const top = useTransform(scrollYProgress, [0.33, 0.8], ["50vh", "1vh"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 4]);
   return (
     <>
       <div>
