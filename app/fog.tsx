@@ -15,7 +15,7 @@ export default function Fog({
   const fogRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     target: scrollRef,
-    offset: ["start end", "start start"],
+    offset: ["start end", "end start"],
   });
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Fog({
       lowlightColor: 0xa71938,
       baseColor: 0xd22727,
       blurFactor: 0.39,
-      speed: 1,
+      speed: 0,
       zoom: 2,
     });
 
@@ -42,11 +42,9 @@ export default function Fog({
   }, [ref]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log("Page scroll: ", latest);
+    console.log("scroll: ", latest);
     if (fogRef.current) {
-      console.log(fogRef.current);
-
-      fogRef.current.setOptions({ speed: 1 + latest * 5, zoom: 2 - latest });
+      fogRef.current.setOptions({ speed: 0 + latest * 5 - 2 });
     }
   });
 

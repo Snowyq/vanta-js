@@ -8,26 +8,33 @@ export default function Home() {
   // Mapa scrolla → przesuń h1 do góry o 300px
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "start start"], // efekt od wejścia ref na dół ekranu do góry
+    offset: ["start end", "end end"],
   });
-  const y = useTransform(scrollYProgress, [0.3, 1], ["0vh", "-70vh"]);
 
+  const top = useTransform(scrollYProgress, [0.33, 1], ["50vh", "1vh"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 2]);
   return (
     <>
-      <div
-        className={
-          "sticky top-0 w-full h-screen flex justify-center items-center -z-10"
-        }
-      >
-        <motion.h1 style={{ y }} className="text-white font-bold text-8xl  ">
-          AMOK STUDIO
-        </motion.h1>
-        <div className="absolute inset-0 -z-10 ">
-          <Fog scrollRef={ref} />
+      <div>
+        <div
+          ref={ref}
+          className={
+            "relative w-full h-[200vh] flex justify-center items-center -z-10 overflow-hidden "
+          }
+        >
+          <motion.h1
+            style={{ top }}
+            className="fixed text-white font-bold text-8xl  top-[50vh]"
+          >
+            AMOK STUDIO
+          </motion.h1>
+          <motion.div className="absolute inset-0 -z-10" style={{ scale }}>
+            <Fog scrollRef={ref} />
+          </motion.div>
         </div>
+        <div className="h-screen bg-white"></div>
+        <div className="h-[300vh] bg-white z-10"></div>
       </div>
-      <div ref={ref} className="h-screen bg-white"></div>
-      <div className="h-[300vh] bg-white z-10"></div>
     </>
   );
 }
