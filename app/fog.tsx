@@ -7,7 +7,8 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 
 export default function Fog() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const fogRef = useRef();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fogRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -40,6 +41,7 @@ export default function Fog() {
     console.log("Page scroll: ", latest);
     if (fogRef.current) {
       console.log(fogRef.current);
+
       fogRef.current.setOptions({ speed: 1 + latest * 5, zoom: 2 - latest });
     }
   });
